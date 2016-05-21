@@ -1,0 +1,14 @@
+v2.
+{<<"/Users/dean/wrk/elixir/phoenix/rumbl/_build/dev/lib/sweet_xml/ebin/Elixir.SweetXpath.beam">>,
+ 'Elixir.SweetXpath',module,<<"lib/sweet_xml.ex">>,
+ ['Elixir.SweetXml','Elixir.Module','Elixir.Kernel','Elixir.Protocol',
+  'Elixir.Kernel.Utils'],
+ [],[],nil}.
+{<<"/Users/dean/wrk/elixir/phoenix/rumbl/_build/dev/lib/sweet_xml/ebin/Elixir.SweetXml.beam">>,
+ 'Elixir.SweetXml',module,<<"lib/sweet_xml.ex">>,
+ ['Elixir.Module',erlang,'Elixir.Record','Elixir.Kernel','Elixir.SweetXpath',
+  'Elixir.Protocol','Elixir.Kernel.Utils'],
+ ['Elixir.Process','Elixir.Keyword','Elixir.Enumerable','Elixir.Enum',
+  'Elixir.List','Elixir.String.Chars','Elixir.IO',xmerl_scan,'Elixir.Dict',
+  xmerl_xpath,'Elixir.Access','Elixir.String','Elixir.Stream'],
+ [],nil}.

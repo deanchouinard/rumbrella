@@ -1,0 +1,10 @@
+/_build
+/cover
+/deps
+erl_crash.dump
+*.ez
+/apps/rumbl/config/prod.secret.exs
+/apps/rumbl/config/dev.secret.exs
+/node_modules
+/priv/static/
+

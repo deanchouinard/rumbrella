@@ -1,0 +1,47 @@
+v2.
+{<<"/Users/dean/wrk/elixir/phoenix/rumbl/_build/dev/lib/comeonin/ebin/Elixir.Comeonin.Config.beam">>,
+ 'Elixir.Comeonin.Config',module,<<"lib/comeonin/config.ex">>,
+ ['Elixir.Module','Elixir.Kernel'],
+ [erlang,'Elixir.Enum','Elixir.Range','Elixir.Application'],
+ [],nil}.
+{<<"/Users/dean/wrk/elixir/phoenix/rumbl/_build/dev/lib/comeonin/ebin/Elixir.Comeonin.Bcrypt.Base64.beam">>,
+ 'Elixir.Comeonin.Bcrypt.Base64',module,<<"lib/comeonin/bcrypt/base64.ex">>,
+ ['Elixir.Module','Elixir.Kernel','Elixir.Bitwise'],
+ [erlang,'Elixir.String.Chars','Elixir.ArgumentError'],
+ [],nil}.
+{<<"/Users/dean/wrk/elixir/phoenix/rumbl/_build/dev/lib/comeonin/ebin/Elixir.Comeonin.beam">>,
+ 'Elixir.Comeonin',module,<<"lib/comeonin.ex">>,
+ ['Elixir.Module','Elixir.Kernel'],
+ [erlang,'Elixir.Mix','Elixir.String.Chars','Elixir.Comeonin.Bcrypt',timer,
+  'Elixir.Comeonin.Pbkdf2'],
+ [],nil}.
+{<<"/Users/dean/wrk/elixir/phoenix/rumbl/_build/dev/lib/comeonin/ebin/Elixir.Comeonin.Bcrypt.beam">>,
+ 'Elixir.Comeonin.Bcrypt',module,<<"lib/comeonin/bcrypt.ex">>,
+ ['Elixir.Module','Elixir.Kernel','Elixir.Bitwise'],
+ [crypto,code,'Elixir.Comeonin.Tools',erlang,string,'Elixir.Comeonin.Config',
+  'Elixir.Comeonin.Bcrypt.Base64','Elixir.Enum','Elixir.List',filename,
+  'Elixir.String.Chars',binary,'Elixir.ArgumentError'],
+ [],nil}.
+{<<"/Users/dean/wrk/elixir/phoenix/rumbl/_build/dev/lib/comeonin/ebin/Elixir.Comeonin.Pbkdf2.Base64.beam">>,
+ 'Elixir.Comeonin.Pbkdf2.Base64',module,<<"lib/comeonin/pbkdf2/base64.ex">>,
+ ['Elixir.Module','Elixir.Enum','Elixir.Kernel','Elixir.Bitwise'],
+ [erlang],
+ [],nil}.
+{<<"/Users/dean/wrk/elixir/phoenix/rumbl/_build/dev/lib/comeonin/ebin/Elixir.Comeonin.Tools.beam">>,
+ 'Elixir.Comeonin.Tools',module,<<"lib/comeonin/tools.ex">>,
+ ['Elixir.Module','Elixir.Kernel','Elixir.Bitwise'],
+ [erlang],
+ [],nil}.
+{<<"/Users/dean/wrk/elixir/phoenix/rumbl/_build/dev/lib/comeonin/ebin/Elixir.Comeonin.Otp.beam">>,
+ 'Elixir.Comeonin.Otp',module,<<"lib/comeonin/otp.ex">>,
+ ['Elixir.Module','Elixir.Kernel','Elixir.Bitwise'],
+ [crypto,math,erlang,os,'Elixir.Regex','Elixir.Keyword','Elixir.Base',binary,
+  'Elixir.ArgumentError','Elixir.String'],
+ [],nil}.
+{<<"/Users/dean/wrk/elixir/phoenix/rumbl/_build/dev/lib/comeonin/ebin/Elixir.Comeonin.Pbkdf2.beam">>,
+ 'Elixir.Comeonin.Pbkdf2',module,<<"lib/comeonin/pbkdf2.ex">>,
+ ['Elixir.Module',erlang,'Elixir.Kernel','Elixir.Bitwise'],
+ [crypto,'Elixir.Comeonin.Tools','Elixir.Comeonin.Config','Elixir.Enum',
+  'Elixir.String.Chars','Elixir.IO','Elixir.Comeonin.Pbkdf2.Base64',
+  'Elixir.ArgumentError','Elixir.String'],
+ [],nil}.

@@ -1,0 +1,10 @@
+v2.
+{<<"/Users/dean/wrk/elixir/phoenix/rumbl/_build/dev/lib/connection/ebin/Elixir.Connection.beam">>,
+ 'Elixir.Connection',module,<<"lib/connection.ex">>,
+ [erlang,'Elixir.Kernel','Elixir.Kernel.Utils','Elixir.String.Chars',
+  'Elixir.Keyword','Elixir.Module','Elixir.GenServer','Elixir.Behaviour',
+  'Elixir.Kernel.Typespec','Elixir.List','Elixir.Protocol',
+  'Elixir.ArgumentError'],
+ [code,'Elixir.Process',proc_lib,gen,error_logger,'Elixir.Code',global,
+  gen_server,'Elixir.System'],
+ [],nil}.

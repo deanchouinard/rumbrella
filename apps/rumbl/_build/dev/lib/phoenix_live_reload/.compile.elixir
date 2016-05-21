@@ -1,0 +1,24 @@
+v2.
+{<<"/Users/dean/wrk/elixir/phoenix/rumbl/_build/dev/lib/phoenix_live_reload/ebin/Elixir.Phoenix.LiveReloader.Socket.beam">>,
+ 'Elixir.Phoenix.LiveReloader.Socket',module,
+ <<"lib/phoenix_live_reload/socket.ex">>,
+ ['Elixir.Kernel','Elixir.Phoenix.Transports.WebSocket','Elixir.Module',
+  'Elixir.Phoenix.Socket','Elixir.Phoenix',
+  'Elixir.Phoenix.Transports.LongPoll'],
+ [],[],nil}.
+{<<"/Users/dean/wrk/elixir/phoenix/rumbl/_build/dev/lib/phoenix_live_reload/ebin/Elixir.Phoenix.LiveReload.Channel.beam">>,
+ 'Elixir.Phoenix.LiveReload.Channel',module,
+ <<"lib/phoenix_live_reload/channel.ex">>,
+ ['Elixir.Kernel','Elixir.Logger','Elixir.Module','Elixir.Phoenix.Socket',
+  'Elixir.Phoenix.Channel'],
+ [erlang,'Elixir.String.Chars','Elixir.Application','Elixir.Path',
+  'Elixir.String','Elixir.Enum','Elixir.Access',fs],
+ [],nil}.
+{<<"/Users/dean/wrk/elixir/phoenix/rumbl/_build/dev/lib/phoenix_live_reload/ebin/Elixir.Phoenix.LiveReloader.beam">>,
+ 'Elixir.Phoenix.LiveReloader',module,
+ <<"lib/phoenix_live_reload/live_reloader.ex">>,
+ ['Elixir.Kernel','Elixir.Application','Elixir.Module','Elixir.Plug.Conn',
+  'Elixir.Plug','Elixir.File'],
+ [erlang,'Elixir.String.Chars','Elixir.String','Elixir.Map','Elixir.Enum',
+  'Elixir.Access'],
+ [],nil}.
