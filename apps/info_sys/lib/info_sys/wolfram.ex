@@ -25,17 +25,18 @@ defmodule InfoSys.Wolfram do
 
   @http Application.get_env(:info_sys, :wolfram)[:http_client] || :httpc
   defp fetch_xml(query_str) do
-    IO.puts "fx start"
-    IO.puts query_str
-    IO.puts app_id()
+  #    IO.puts "fx start"
+  #  IO.puts query_str
+  #   IO.puts app_id()
 
     {:ok, {_, _, body}} = @http.request(
       String.to_char_list("http://api.wolframalpha.com/v2/query" <>
         "?appid=#{app_id()}" <>
         "&input=#{URI.encode(query_str)}&format=plaintext"))
-    IO.puts "fx end"
-        
-    IO.inspect(body)
+  # IO.puts "fx end"
+
+  #  IO.inspect(body)
+    body
   end
 
   defp app_id, do: Application.get_env(:info_sys, :wolfram)[:app_id]
