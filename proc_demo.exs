@@ -18,7 +18,7 @@ end
 defmodule ProcDemo do
   use Application
 
-  @backends [ProcDemo.Wolfram]
+  @backends [ProcDemo.Wolfram, ProcDemo.Woogle]
 
   defmodule Result do
     defstruct score: 0, text: nil, url: nil, backend: nil
@@ -47,11 +47,13 @@ defmodule ProcDemo do
     query_ref = make_ref()
     opts = [backend, query, query_ref, self(), limit]
     {:ok, pid} = Supervisor.start_child(ProcDemo.Supervisor, opts)
+    IO.puts "Created process #{backend}, PID: #{inspect(pid)}"
     monitor_ref = Process.monitor(pid)
     {pid, monitor_ref, query_ref}
   end
 
   defp await_results(children, opts) do
+    IO.inspect(children)
     timeout = opts[:timeout] || 9000
     timer = Process.send_after(self(), :timeout, timeout)
     results = await_result(children, [], :infinity)
@@ -64,9 +66,11 @@ defmodule ProcDemo do
 
     receive do
       {:results, ^query_ref, results} ->
+        IO.puts "Recv rslt: #{inspect(pid)}"
         Process.demonitor(monitor_ref, [:flush])
         await_result(tail, results ++ acc, timeout)
       {:DOWN, ^monitor_ref, :process, ^pid, _reason} ->
+        IO.puts "Recv DWN: #{inspect(pid)}"
         await_result(tail, acc, timeout)
       :timeout ->
         kill(pid, monitor_ref)
@@ -120,7 +124,7 @@ defmodule ProcDemo.Wolfram do
   end
 
   @http Application.get_env(:info_sys, :wolfram)[:http_client] || :httpc
-  defp fetch_xml(query_str) do
+  defp fetch_xml(_query_str) do
   #    IO.puts "fx start"
   #  IO.puts query_str
   #   IO.puts app_id()
@@ -132,16 +136,51 @@ defmodule ProcDemo.Wolfram do
   # IO.puts "fx end"
 
   #  IO.inspect(body)
-    body = "Hello"
+    _body = "Hello"
   end
 
-  defp app_id, do: Application.get_env(:info_sys, :wolfram)[:app_id]
+  # defp app_id, do: Application.get_env(:info_sys, :wolfram)[:app_id]
+end
+
+defmodule ProcDemo.Woogle do
+  alias ProcDemo.Result
+
+  def start_link(query, query_ref, owner, limit) do
+    Task.start_link(__MODULE__, :fetch, [query, query_ref, owner, limit])
+  end
+
+  def fetch(query_str, query_ref, owner, _limit) do
+    query_str
+    |> fetch_xml()
+    |> send_results(query_ref, owner)
+  end
+
+  defp send_results(nil, query_ref, owner) do
+    send(owner, {:results, query_ref, []})
+  end
+  defp send_results(answer, query_ref, owner) do
+    results = [%Result{backend: "woogle", score: 97, text: to_string(answer)}]
+    send(owner, {:results, query_ref, results})
+  end
+
+  defp fetch_xml(_query_str) do
+  #    IO.puts "fx start"
+  #  IO.puts query_str
+  #   IO.puts app_id()
+
+    # {:ok, {_, _, body}} = @http.request(
+    #   String.to_char_list("http://api.wolframalpha.com/v2/query" <>
+    #     "?appid=#{app_id()}" <>
+    #     "&input=#{URI.encode(query_str)}&format=plaintext"))
+  # IO.puts "fx end"
+
+  #  IO.inspect(body)
+    _body = "World!"
+  end
 end
 
 ProcDemo.start(1,1)
 
 IO.inspect ProcDemo.compute("1 + 1")
-receive do
 
 
-end
