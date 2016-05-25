@@ -18,7 +18,8 @@ end
 defmodule ProcDemo do
   use Application
 
-  @backends [ProcDemo.Wolfram, ProcDemo.Woogle]
+  @backends [ProcDemo.Wolfram, ProcDemo.Woogle, ProcDemo.Boomer,
+              ProcDemo.Sleeper]
 
   defmodule Result do
     defstruct score: 0, text: nil, url: nil, backend: nil
@@ -73,10 +74,12 @@ defmodule ProcDemo do
         IO.puts "Recv DWN: #{inspect(pid)}"
         await_result(tail, acc, timeout)
       :timeout ->
+        IO.puts "Recv TO: #{inspect(pid)}"
         kill(pid, monitor_ref)
         await_result(tail, acc, 0)
     after
       timeout ->
+        IO.puts "Recv ATO: #{inspect(pid)}"
         kill(pid, monitor_ref)
         await_result(tail, acc, 0)
     end
@@ -179,6 +182,29 @@ defmodule ProcDemo.Woogle do
   end
 end
 
+defmodule ProcDemo.Boomer do
+  #alias ProcDemo.Result
+
+  def start_link(query, query_ref, owner, limit) do
+    Task.start_link(__MODULE__, :fetch, [query, query_ref, owner, limit])
+  end
+
+  def fetch(query_str, query_ref, owner, _limit) do
+    raise "boom!"
+  end
+end
+
+defmodule ProcDemo.Sleeper do
+  #alias ProcDemo.Result
+
+  def start_link(query, query_ref, owner, limit) do
+    Task.start_link(__MODULE__, :fetch, [query, query_ref, owner, limit])
+  end
+
+  def fetch(query_str, query_ref, owner, _limit) do
+    :timer.sleep(:infinity)
+  end
+end
 ProcDemo.start(1,1)
 
 IO.inspect ProcDemo.compute("1 + 1")
