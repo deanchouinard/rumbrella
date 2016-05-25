@@ -75,7 +75,7 @@ defmodule InfoSys do
     receive do
       :timout -> :ok
     after
-      0 -> :k
+      0 -> :ok
     end
   end
 

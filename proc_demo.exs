@@ -1,4 +1,8 @@
-
+#
+# Demonstrate processes and receiving messages
+#
+# DGC: 5/25/16
+#
 defmodule ProcDemo.Supervisor do
   use Supervisor
 
@@ -18,8 +22,11 @@ end
 defmodule ProcDemo do
   use Application
 
-  @backends [ProcDemo.Wolfram, ProcDemo.Woogle, ProcDemo.Boomer,
-              ProcDemo.Sleeper]
+  #
+  # Change order of backends; note how Sleeper (hang) makes the other
+  # messages wait to appear
+  #
+  @backends [ProcDemo.Wolfram, ProcDemo.Sleeper, ProcDemo.Woogle, ProcDemo.Boomer]
 
   defmodule Result do
     defstruct score: 0, text: nil, url: nil, backend: nil
@@ -54,9 +61,12 @@ defmodule ProcDemo do
   end
 
   defp await_results(children, opts) do
+    IO.puts "List of children -------------"
     IO.inspect(children)
     timeout = opts[:timeout] || 9000
     timer = Process.send_after(self(), :timeout, timeout)
+    IO.puts "Messages ------------"
+    # use recursion with an accumulator to gather results
     results = await_result(children, [], :infinity)
     cleanup(timer)
     results
@@ -65,6 +75,9 @@ defmodule ProcDemo do
   defp await_result([head|tail], acc, timeout) do
     {pid, monitor_ref, query_ref} = head
 
+    #
+    # print when a message is received
+    #
     receive do
       {:results, ^query_ref, results} ->
         IO.puts "Recv rslt: #{inspect(pid)}"
@@ -99,7 +112,7 @@ defmodule ProcDemo do
     receive do
       :timout -> :ok
     after
-      0 -> :k
+      0 -> :ok
     end
   end
 
@@ -128,21 +141,8 @@ defmodule ProcDemo.Wolfram do
 
   @http Application.get_env(:info_sys, :wolfram)[:http_client] || :httpc
   defp fetch_xml(_query_str) do
-  #    IO.puts "fx start"
-  #  IO.puts query_str
-  #   IO.puts app_id()
-
-    # {:ok, {_, _, body}} = @http.request(
-    #   String.to_char_list("http://api.wolframalpha.com/v2/query" <>
-    #     "?appid=#{app_id()}" <>
-    #     "&input=#{URI.encode(query_str)}&format=plaintext"))
-  # IO.puts "fx end"
-
-  #  IO.inspect(body)
     _body = "Hello"
   end
-
-  # defp app_id, do: Application.get_env(:info_sys, :wolfram)[:app_id]
 end
 
 defmodule ProcDemo.Woogle do
@@ -167,44 +167,41 @@ defmodule ProcDemo.Woogle do
   end
 
   defp fetch_xml(_query_str) do
-  #    IO.puts "fx start"
-  #  IO.puts query_str
-  #   IO.puts app_id()
-
-    # {:ok, {_, _, body}} = @http.request(
-    #   String.to_char_list("http://api.wolframalpha.com/v2/query" <>
-    #     "?appid=#{app_id()}" <>
-    #     "&input=#{URI.encode(query_str)}&format=plaintext"))
-  # IO.puts "fx end"
-
-  #  IO.inspect(body)
     _body = "World!"
   end
 end
 
 defmodule ProcDemo.Boomer do
-  #alias ProcDemo.Result
 
   def start_link(query, query_ref, owner, limit) do
     Task.start_link(__MODULE__, :fetch, [query, query_ref, owner, limit])
   end
 
-  def fetch(query_str, query_ref, owner, _limit) do
+  def fetch(_query_str, _query_ref, _owner, _limit) do
+    #
+    # demonstrate a process crash
+    #
     raise "boom!"
   end
 end
 
 defmodule ProcDemo.Sleeper do
-  #alias ProcDemo.Result
 
   def start_link(query, query_ref, owner, limit) do
     Task.start_link(__MODULE__, :fetch, [query, query_ref, owner, limit])
   end
 
-  def fetch(query_str, query_ref, owner, _limit) do
+  def fetch(_query_str, _query_ref, _owner, _limit) do
+    #
+    # demonstrate a hung process
+    #
     :timer.sleep(:infinity)
   end
 end
+
+#
+# Start the supervisor
+#
 ProcDemo.start(1,1)
 
 IO.inspect ProcDemo.compute("1 + 1")
